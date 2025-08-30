@@ -21,7 +21,7 @@ class ShowSession(models.Model):
 class Ticket(models.Model):
     row = models.IntegerField()
     seat = models.IntegerField()
-    show_sessions = models.ForeignKey(ShowSession)
+    show_sessions = models.ForeignKey(ShowSession, on_delete=models.CASCADE)
     reserve = models.ForeignKey(
         "Reservation", on_delete=models.CASCADE, related_name="tickets"
     )
