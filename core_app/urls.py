@@ -17,11 +17,17 @@ Including another URLconf
 
 from django.urls import path
 
-from core_app.views import index
+from core_app.views import index, show_themes_list, ShowSessionsListView, TicketListView, ReservationListView, PlanetariumDomeListView, AstronomyShowListView
 
 
 urlpatterns = [
     path("index/", index, name="index"),
+    path("showthemes/", show_themes_list, name="showthemes-list"),
+    path("showsessions/", ShowSessionsListView.as_view(), name="showsessions-list"),
+    path("tickets/", TicketListView.as_view(), name="tickets-list"),
+    path("reservations/", ReservationListView.as_view(), name="reservations-list"),
+    path("planetariumdomes/", PlanetariumDomeListView.as_view(), name="planetariumdomes-list"),
+    path("astronomyshows/", AstronomyShowListView.as_view(), name="astronomyshows-list"),
 ]
 
 

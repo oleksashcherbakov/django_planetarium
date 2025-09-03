@@ -23,5 +23,5 @@ from debug_toolbar.toolbar import debug_toolbar_urls
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
-    path("", include("core_app.urls", namespace="core_app")),
+    path("planetarium/", include("core_app.urls", namespace="core_app")),
 ] + debug_toolbar_urls()

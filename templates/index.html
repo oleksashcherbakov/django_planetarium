@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Home page
+{% endblock %}
+
+{% block content %}
+  <h1>Home page</h1>
+  {% if username %}
+    <p>Hello {{ username }}!!! Glad to see you again</p>
+  {% else %}
+    <p>Hello Anonymous</p>
+    {% endif %}
+{% endblock %}
