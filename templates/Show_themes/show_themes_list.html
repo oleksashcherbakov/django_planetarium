@@ -9,7 +9,7 @@
   <ul>
     {% if show_themes %}
       {% for theme in show_themes %}
-        <li> {{ theme.name }} </li>
+        <li><a href="{% url 'core_app:showthemes-detail' theme.id %}">{{ theme.name }}</a>  </li>
       {% endfor %}
     {% else %}
       <p> No Show themes found</p>

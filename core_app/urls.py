@@ -19,8 +19,11 @@ from django.urls import path
 
 from core_app.views import (
     index,
-    show_themes_list,
+    show_themes_list_view,
+    show_themes_detail,
     ShowSessionsListView,
+    ShowSessionsDetailView,
+
     TicketListView,
     ReservationListView,
     PlanetariumDomeListView,
@@ -30,8 +33,10 @@ from core_app.views import (
 
 urlpatterns = [
     path("index/", index, name="index"),
-    path("showthemes/", show_themes_list, name="showthemes-list"),
+    path("showthemes/", show_themes_list_view, name="showthemes-list"),
+    path("showthemes/<int:pk>", show_themes_detail, name="showthemes-detail"),
     path("showsessions/", ShowSessionsListView.as_view(), name="showsessions-list"),
+    path("showsessions/<int:pk>", ShowSessionsDetailView.as_view(), name="showsessions-detail"),
     path("tickets/", TicketListView.as_view(), name="tickets-list"),
     path("reservations/", ReservationListView.as_view(), name="reservations-list"),
     path(

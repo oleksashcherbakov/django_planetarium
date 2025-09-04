@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+  There is detail information about show session # {{ show_session.id }}
+{% endblock %}
+
+{% block content %}
+  <h1>You are interesting in astronomy show {{ show_session.astronomy_show.title }} in planetarium dome {{ show_session.planetarium_dome.name}}</h1>
+  <br>
+  <div class="ml-3">
+    {% if show_session.astronomy_show %}
+      <h3> Astronomy show description:</h3>
+      <p class="text-muted">  {{ show_session.astronomy_show.description }}</p>
+    {% else %}
+        <p> There is no information about astronomy show</p>
+    {% endif %}
+
+    {% if show_session.planetarium_dome %}
+      <h3>Detail information about planetarium dome:</h3>
+        <p class="text-muted"> Amount of rows: {{ show_session.planetarium_dome.rows }}, seats in row: {{ show_session.planetarium_dome.seats_in_row}} </p>
+    {% else %}
+      <p> There is no information about planetarium dome</p>
+    {% endif %}
+  </div>
+{% endblock %}

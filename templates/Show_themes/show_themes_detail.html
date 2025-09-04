@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+  There is detail information about {{ show_theme.name }}
+{% endblock %}
+
+{% block content %}
+  <h1>You are interesting in {{ show_theme.name }} </h1>
+  <div class="ml-3">
+    <h3>Astronomy Show:</h3>
+    {% for astronomy_show in show_theme.astronomy_shows.all %}
+      <hr>
+      <p class="text-muted"> {{ astronomy_show.title }}</p>
+      <p>  {{ astronomy_show.description }}</p>
+    {% endfor %}
+  </div>
+{% endblock %}

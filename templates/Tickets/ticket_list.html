@@ -9,7 +9,7 @@
   <ul>
     {% if tickets %}
       {% for ticket in tickets %}
-        <li> {{ ticket.row }}, {{ ticket.seat }}, {{ ticket.show_sessions }}, {{ ticket.reserve }} </li>
+        <li> {{ ticket.row }}, {{ ticket.seat }}, {{ ticket.show_sessions }} </li>
       {% endfor %}
     {% else %}
       <p> No tickets found</p>
