@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Planetarium Domes
+{% endblock %}
+
+{% block content %}
+  <h1>Planetarium Domes List</h1>
+  <ul>
+    {% if planetarium_domes %}
+      {% for planetarium_dome in planetarium_domes %}
+        <li> {{ planetarium_dome.name }}, {{ planetarium_dome.rows }}, {{ planetarium_dome.seats_in_row }} </li>
+      {% endfor %}
+    {% else %}
+      <p> No Planetarium Domes found</p>
+    {% endif %}
+  </ul>
+{% endblock %}

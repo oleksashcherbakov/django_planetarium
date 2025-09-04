@@ -41,13 +41,11 @@ class TicketAdmin(admin.ModelAdmin):
 class ReservationAdmin(admin.ModelAdmin):
     list_display = (
         "user",
-        "ticket",
         "created_at",
     )
     list_filter = (
         "user",
         "created_at",
-        "ticket",
     )
     search_fields = (
         "user__username",

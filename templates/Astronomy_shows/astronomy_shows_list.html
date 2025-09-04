@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Astronomy shows
+{% endblock %}
+
+{% block content %}
+  <h1>Astronomy Shows List</h1>
+  <ul>
+    {% if astronomy_shows %}
+      {% for astronomy_show in astronomy_shows %}
+        <li> {{ astronomy_show.title }}, {{ astronomy_show.description }}, {{ astronomy_show.themes }} </li>
+      {% endfor %}
+    {% else %}
+      <p> No Astronomy Shows found</p>
+    {% endif %}
+  </ul>
+{% endblock %}

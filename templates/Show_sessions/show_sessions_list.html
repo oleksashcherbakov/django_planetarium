@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Show themes
+{% endblock %}
+
+{% block content %}
+  <h1>Show Sessions List</h1>
+  <ul>
+    {% if show_sessions %}
+      {% for show_session in show_sessions %}
+        <li> {{ show_session.astronomy_show }}, {{ show_session.planetarium_dome }}, {{ show_session.show_time }}</li>
+      {% endfor %}
+    {% else %}
+      <p> No Show Sessions found</p>
+    {% endif %}
+  </ul>
+{% endblock %}

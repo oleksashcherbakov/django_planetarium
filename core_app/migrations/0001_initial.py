@@ -143,7 +143,7 @@ class Migration(migrations.Migration):
                     "reserve",
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
-                        related_name="tickets",
+                        related_name="Tickets",
                         to="core_app.reservation",
                     ),
                 ),

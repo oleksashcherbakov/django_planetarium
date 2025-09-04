@@ -1,4 +1,5 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models
 
 
@@ -23,23 +24,31 @@ class Ticket(models.Model):
     seat = models.IntegerField()
     show_sessions = models.ForeignKey(ShowSession, on_delete=models.CASCADE)
     reserve = models.ForeignKey(
-        "Reservation", on_delete=models.CASCADE, related_name="tickets"
+        "Reservation", on_delete=models.CASCADE, related_name="Tickets"
     )
 
     class Meta:
         unique_together = ("row", "seat", "show_sessions")
 
     def __str__(self):
-        return f"{self.row} {self.seat} {self.show_sessions.planetarium_dome}"
+        return f"{self.row} {self.seat} {self.show_sessions}"
+
+    def clean(self):
+        dome = self.show_sessions.planetarium_dome
+
+        if not (1 <= self.row <= dome.rows):
+            raise ValidationError(f"row must be between 1 and {dome.rows}")
+
+        if not (1 <= self.seat <= dome.seats_in_row):
+            raise ValidationError(f"seat must be between 1 and {dome.seats_in_row}")
 
 
 class Reservation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
-    ticket = models.ForeignKey(Ticket, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.ticket} {self.created_at}"
+        return f"{self.created_at} by {self.user}"
 
 
 class PlanetariumDome(models.Model):

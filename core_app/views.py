@@ -4,7 +4,14 @@ from django.http import HttpRequest, HttpResponse
 from django.views import generic
 from django.shortcuts import render
 
-from core_app.models import ShowTheme, ShowSession, Ticket, Reservation, PlanetariumDome, AstronomyShow
+from core_app.models import (
+    ShowTheme,
+    ShowSession,
+    Ticket,
+    Reservation,
+    PlanetariumDome,
+    AstronomyShow,
+)
 
 
 def index(request: HttpRequest) -> HttpResponse:
@@ -14,8 +21,6 @@ def index(request: HttpRequest) -> HttpResponse:
         context["username"] = request.user.username
 
     return render(request, "index.html", context)
-
-
 
 
 def show_themes_list(request: HttpRequest) -> HttpResponse:
@@ -34,7 +39,7 @@ class ShowSessionsListView(generic.ListView):
 
 class TicketListView(generic.ListView):
     model = Ticket
-    context_object_name = "tickets"
+    context_object_name = "Tickets"
     template_name = "tickets/ticket_list.html"
 
 
