@@ -9,7 +9,7 @@
   <ul>
     {% if reservations %}
       {% for reservation in reservations %}
-        <li> {{ reservation.created_at }}, {{ reservation.user }} </li>
+        <li><a href=" {{ reservation.get_absolute_url }}">{{ reservation.created_at }}, {{ reservation.user }}</a> </li>
       {% endfor %}
     {% else %}
       <p> No reservations found</p>

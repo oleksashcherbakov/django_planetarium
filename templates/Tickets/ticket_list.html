@@ -9,7 +9,7 @@
   <ul>
     {% if tickets %}
       {% for ticket in tickets %}
-        <li> {{ ticket.row }}, {{ ticket.seat }}, {{ ticket.show_sessions }} </li>
+        <li><a href="{{ ticket.get_absolute_url }}">Row: {{ ticket.row }}, Seat: {{ ticket.seat }}, Show: {{ ticket.show_sessions.astronomy_show.title }} in  {{ ticket.show_sessions.planetarium_dome.name}}</a> </li>
       {% endfor %}
     {% else %}
       <p> No tickets found</p>

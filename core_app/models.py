@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.urls.base import reverse
 
 
 class ShowSession(models.Model):
@@ -24,7 +25,7 @@ class Ticket(models.Model):
     seat = models.IntegerField()
     show_sessions = models.ForeignKey(ShowSession, on_delete=models.CASCADE)
     reserve = models.ForeignKey(
-        "Reservation", on_delete=models.CASCADE, related_name="Tickets"
+        "Reservation", on_delete=models.CASCADE, related_name="tickets"
     )
 
     class Meta:
@@ -42,6 +43,8 @@ class Ticket(models.Model):
         if not (1 <= self.seat <= dome.seats_in_row):
             raise ValidationError(f"seat must be between 1 and {dome.seats_in_row}")
 
+    def get_absolute_url(self):
+        return reverse("core_app:tickets-detail", args=(str(self.id)))
 
 class Reservation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
@@ -49,6 +52,9 @@ class Reservation(models.Model):
 
     def __str__(self):
         return f"{self.created_at} by {self.user}"
+
+    def get_absolute_url(self):
+        return reverse("core_app:reservation-detail", args=(str(self.id)))
 
 
 class PlanetariumDome(models.Model):

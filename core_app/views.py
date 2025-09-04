@@ -62,10 +62,24 @@ class TicketListView(generic.ListView):
     template_name = "tickets/ticket_list.html"
 
 
+
+class TicketDetailView(generic.DetailView):
+    model = Ticket
+    queryset = Ticket.objects.select_related("show_sessions", "reserve").select_related("show_sessions__astronomy_show", "show_sessions__planetarium_dome")
+    context_object_name = "ticket"
+    template_name = "tickets/ticket_detail.html"
+
+
 class ReservationListView(generic.ListView):
     model = Reservation
     context_object_name = "reservations"
     template_name = "reservations/reservations_list.html"
+
+
+class ReservationDetailView(generic.DetailView):
+    model = Reservation
+    context_object_name = "reservation"
+    template_name = "reservations/reservation_detail.html"
 
 
 class PlanetariumDomeListView(generic.ListView):

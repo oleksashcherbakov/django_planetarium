@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+  There is detail information about your reservation  # {{ reservation.id }}
+{% endblock %}
+
+{% block content %}
+  <h1> {{ reservation.user.username}}: Information about your reservation # {{ reservation.id }}</h1>
+  <br>
+  <div class="ml-3">
+    {% if reservation.tickets %}
+      <h3> Tickets: </h3>
+      {% for ticket in reservation.tickets.all %}
+        <p class="text-muted">  Row: {{ ticket.row }}, Seat {{ ticket.seat }}, Dome: {{ticket.show_sessions.planetarium_dome.name }}</p>
+      {% endfor %}
+    {% else %}
+        <p> There is no information about your tickets</p>
+    {% endif %}
+
+  </div>
+{% endblock %}

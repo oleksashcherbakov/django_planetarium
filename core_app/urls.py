@@ -25,7 +25,9 @@ from core_app.views import (
     ShowSessionsDetailView,
 
     TicketListView,
+    TicketDetailView,
     ReservationListView,
+    ReservationDetailView,
     PlanetariumDomeListView,
     AstronomyShowListView,
 )
@@ -38,7 +40,9 @@ urlpatterns = [
     path("showsessions/", ShowSessionsListView.as_view(), name="showsessions-list"),
     path("showsessions/<int:pk>", ShowSessionsDetailView.as_view(), name="showsessions-detail"),
     path("tickets/", TicketListView.as_view(), name="tickets-list"),
+    path("tickets/<int:pk>", TicketDetailView.as_view(), name="tickets-detail"),
     path("reservations/", ReservationListView.as_view(), name="reservations-list"),
+    path("reservations/<int:pk>", ReservationDetailView.as_view(), name="reservation-detail"),
     path(
         "planetariumdomes/",
         PlanetariumDomeListView.as_view(),
