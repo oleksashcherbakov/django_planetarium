@@ -15,7 +15,19 @@ from core_app.models import (
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    context = {}
+    num_showtheme = ShowTheme.objects.count()
+    num_showsession = ShowSession.objects.count()
+    num_planetariumdome = PlanetariumDome.objects.count()
+    num_astronomyshow = AstronomyShow.objects.count()
+
+    num_visits = request.session.get("num_visits", 0) + 1
+    request.session["num_visits"] = num_visits
+
+    context = {"num_showtheme": num_showtheme,
+               "num_showsession": num_showsession,
+               "num_planetariumdome": num_planetariumdome,
+               "num_astronomyshow": num_astronomyshow,
+               "num_visits": num_visits}
 
     if request.user.is_authenticated:
         context["username"] = request.user.username

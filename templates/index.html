@@ -5,10 +5,18 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Home page</h1>
+  <h1>Planetarium page</h1>
   {% if username %}
     <p>Hello {{ username }}!!! Glad to see you again</p>
   {% else %}
     <p>Hello Anonymous</p>
     {% endif %}
+  <h3>Breaf information about our Planetarium</h3>
+  <ul>
+    <li>Number of Show themes: {{num_showtheme}}</li>
+    <li>Number of Show sessions:{{num_showsession}}</li>
+    <li>Number of Planetarium Domes: {{num_planetariumdome}}</li>
+    <li>Number of Astronomy shows: {{num_astronomyshow}}</li>
+  </ul>
+  <p>You have visited this page {{ num_visits}} {% if num_visits == 1%} time {% else %} times{% endif %}. </p>
 {% endblock %}
