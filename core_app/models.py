@@ -46,6 +46,7 @@ class Ticket(models.Model):
     def get_absolute_url(self):
         return reverse("core_app:tickets-detail", args=(str(self.id)))
 
+
 class Reservation(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)

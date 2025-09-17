@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Show Sessions List</h1>
+  <h1>Show Sessions List <a href="{% url 'core_app:showsessions-create' %}" style="text-decoration: none;">+</a></h1>
   <ul>
     {% if show_sessions %}
       {% for show_session in show_sessions %}

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Reservations List</h1>
+  <h1>Reservations List <a href="{% url 'core_app:reservations-create' %}" style="text-decoration: none;">+</a> </h1>
   <ul>
     {% if reservations %}
       {% for reservation in reservations %}

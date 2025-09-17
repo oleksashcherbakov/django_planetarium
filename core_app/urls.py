@@ -21,21 +21,21 @@ from core_app.views import (
     index,
     show_themes_list_view,
     show_themes_detail,
-
     ShowSessionsListView,
     ShowSessionsDetailView,
-
+    ShowSessionsCreateView,
     TicketListView,
     TicketDetailView,
-
+    TicketCreateView,
     ReservationListView,
     ReservationDetailView,
-
+    ReservationCreateView,
     PlanetariumDomeListView,
     PlanetariumDomeDetailView,
-
+    PlanetariumDomeCreateView,
     AstronomyShowListView,
-    AstronomyShowDetailView
+    AstronomyShowDetailView,
+    AstronomyShowCreateView,
 )
 
 
@@ -44,22 +44,46 @@ urlpatterns = [
     path("showthemes/", show_themes_list_view, name="showthemes-list"),
     path("showthemes/<int:pk>", show_themes_detail, name="showthemes-detail"),
     path("showsessions/", ShowSessionsListView.as_view(), name="showsessions-list"),
-    path("showsessions/<int:pk>", ShowSessionsDetailView.as_view(), name="showsessions-detail"),
+    path(
+        "showsessions/<int:pk>",
+        ShowSessionsDetailView.as_view(),
+        name="showsessions-detail",
+    ),
+    path("showsessions/create", ShowSessionsCreateView.as_view(), name="showsessions-create"),
     path("tickets/", TicketListView.as_view(), name="tickets-list"),
     path("tickets/<int:pk>", TicketDetailView.as_view(), name="tickets-detail"),
+    path("tickets/create", TicketCreateView.as_view(), name="tickets-create"),
     path("reservations/", ReservationListView.as_view(), name="reservations-list"),
-    path("reservations/<int:pk>", ReservationDetailView.as_view(), name="reservation-detail"),
+    path(
+        "reservations/<int:pk>",
+        ReservationDetailView.as_view(),
+        name="reservation-detail",
+    ),
+    path("reservations/create", ReservationCreateView.as_view(), name="reservations-create"),
     path(
         "planetariumdomes/",
         PlanetariumDomeListView.as_view(),
         name="planetariumdomes-list",
     ),
-    path("planetariumdomes/<int:pk>", PlanetariumDomeDetailView.as_view(), name="planetariumdome-detail"),
+    path(
+        "planetariumdomes/<int:pk>",
+        PlanetariumDomeDetailView.as_view(),
+        name="planetariumdome-detail",
+    ),
+    path("planetariumdomes/create", PlanetariumDomeCreateView.as_view(), name="planetariumdomes-create"),
     path(
         "astronomyshows/", AstronomyShowListView.as_view(), name="astronomyshows-list"
     ),
     path(
-        "astronomyshows/<int:pk>", AstronomyShowDetailView.as_view(), name="astronomyshows-detail"),
+        "astronomyshows/<int:pk>",
+        AstronomyShowDetailView.as_view(),
+        name="astronomyshows-detail",
+    ),
+    path(
+        "astronomyshows/create",
+        AstronomyShowCreateView.as_view(),
+        name="astronomyshows-create",
+    ),
 ]
 
 

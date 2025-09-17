@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Tickets List</h1>
+  <h1>Tickets List <a href="{% url 'core_app:tickets-create' %}" style="text-decoration: none;">+</a></h1>
   <ul>
     {% if tickets %}
       {% for ticket in tickets %}

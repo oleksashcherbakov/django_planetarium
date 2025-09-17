@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Planetarium Domes List</h1>
+  <h1>Planetarium Domes List <a href="{% url 'core_app:planetariumdomes-create' %}" style="text-decoration: none;">+</a></h1>
   <ul>
     {% if planetarium_domes %}
       {% for planetarium_dome in planetarium_domes %}
