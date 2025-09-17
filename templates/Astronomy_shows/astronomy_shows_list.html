@@ -9,7 +9,7 @@
   <ul>
     {% if astronomy_shows %}
       {% for astronomy_show in astronomy_shows %}
-        <li> {{ astronomy_show.title }}, {{ astronomy_show.description }}, {{ astronomy_show.themes }} </li>
+        <li><a href="{% url 'core_app:astronomyshows-detail' astronomy_show.id %}">{{ astronomy_show.title }}, {{ astronomy_show.description }}, {{ astronomy_show.themes }} </a> </li>
       {% endfor %}
     {% else %}
       <p> No Astronomy Shows found</p>

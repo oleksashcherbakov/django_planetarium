@@ -9,7 +9,7 @@
   <ul>
     {% if planetarium_domes %}
       {% for planetarium_dome in planetarium_domes %}
-        <li> {{ planetarium_dome.name }}, {{ planetarium_dome.rows }}, {{ planetarium_dome.seats_in_row }} </li>
+        <li><a href="{% url 'core_app:planetariumdome-detail' planetarium_dome.id %}">{{ planetarium_dome.name }}, {{ planetarium_dome.rows }}, {{ planetarium_dome.seats_in_row }} </a></li>
       {% endfor %}
     {% else %}
       <p> No Planetarium Domes found</p>

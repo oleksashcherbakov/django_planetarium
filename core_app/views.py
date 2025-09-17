@@ -88,7 +88,19 @@ class PlanetariumDomeListView(generic.ListView):
     template_name = "planetarium_domes/planetarium_domes_list.html"
 
 
+class PlanetariumDomeDetailView(generic.DetailView):
+    model = PlanetariumDome
+    queryset = PlanetariumDome.objects.prefetch_related("show_sessions")
+    context_object_name = "planetarium_dome"
+    template_name = "planetarium_domes/planetarium_dome_detail.html"
+
 class AstronomyShowListView(generic.ListView):
     model = AstronomyShow
     context_object_name = "astronomy_shows"
     template_name = "astronomy_shows/astronomy_shows_list.html"
+
+class AstronomyShowDetailView(generic.DetailView):
+    model = AstronomyShow
+    queryset = AstronomyShow.objects.prefetch_related("show_sessions", "show_sessions__planetarium_dome")
+    context_object_name = "astronomy_show"
+    template_name = "astronomy_shows/astronomy_show_detail.html"

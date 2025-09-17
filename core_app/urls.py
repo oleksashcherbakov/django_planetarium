@@ -21,15 +21,21 @@ from core_app.views import (
     index,
     show_themes_list_view,
     show_themes_detail,
+
     ShowSessionsListView,
     ShowSessionsDetailView,
 
     TicketListView,
     TicketDetailView,
+
     ReservationListView,
     ReservationDetailView,
+
     PlanetariumDomeListView,
+    PlanetariumDomeDetailView,
+
     AstronomyShowListView,
+    AstronomyShowDetailView
 )
 
 
@@ -48,9 +54,12 @@ urlpatterns = [
         PlanetariumDomeListView.as_view(),
         name="planetariumdomes-list",
     ),
+    path("planetariumdomes/<int:pk>", PlanetariumDomeDetailView.as_view(), name="planetariumdome-detail"),
     path(
         "astronomyshows/", AstronomyShowListView.as_view(), name="astronomyshows-list"
     ),
+    path(
+        "astronomyshows/<int:pk>", AstronomyShowDetailView.as_view(), name="astronomyshows-detail"),
 ]
 
 

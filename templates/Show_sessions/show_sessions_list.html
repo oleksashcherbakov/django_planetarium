@@ -9,7 +9,7 @@
   <ul>
     {% if show_sessions %}
       {% for show_session in show_sessions %}
-        <li> {{ show_session.astronomy_show }}, {{ show_session.planetarium_dome }}, {{ show_session.show_time }}</li>
+        <li><a href="{% url 'core_app:showsessions-detail' show_session.id %}">{{ show_session.astronomy_show }}, {{ show_session.planetarium_dome }}, {{ show_session.show_time }}</a></li>
       {% endfor %}
     {% else %}
       <p> No Show Sessions found</p>

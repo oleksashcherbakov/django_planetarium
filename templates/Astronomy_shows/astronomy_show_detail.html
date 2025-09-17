@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+  There is detail information about astronomy show # {{ astronomy_show.id }}
+{% endblock %}
+
+{% block content %}
+  <h1> {{ astronomy_show.title}}: Information about astronomy show # {{ astronomy_show.id }}</h1>
+  <br>
+  <div class="ml-3">
+    {% if astronomy_show.show_sessions %}
+      <h3> Show sessions: </h3>
+      {% for show_session in astronomy_show.show_sessions.all %}
+        <p class="text-muted">  <strong>Show session will be placed in:</strong> {{ show_session.planetarium_dome.name  }}, <strong> at </strong>{{ show_session.show_time }}</p>
+      {% endfor %}
+    {% else %}
+        <p> There is no information about your astronomy show</p>
+    {% endif %}
+
+  </div>
+{% endblock %}
