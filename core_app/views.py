@@ -1,9 +1,8 @@
-from http.client import HTTPResponse
-
 from django.http import HttpRequest, HttpResponse
 from django.http.response import Http404
 from django.views import generic
 from django.shortcuts import render
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from core_app.models import (
     ShowTheme,
@@ -25,9 +24,22 @@ def index(request: HttpRequest) -> HttpResponse:
 
 
 def show_themes_list_view(request: HttpRequest) -> HttpResponse:
-    show_themes = ShowTheme.objects.all()
+    show_themes = ShowTheme.objects.all().order_by("name")
+    paginator = Paginator(show_themes, 3)
+    page = request.GET.get('page')
 
-    context = {"show_themes": show_themes}
+    try:
+        show_themes = paginator.page(page)
+    except PageNotAnInteger:
+        show_themes = paginator.page(1)
+    except EmptyPage:
+        show_themes = paginator.page(paginator.num_pages)
+
+    page_obj = paginator.get_page(page)
+    is_paginated = page_obj.has_other_pages()
+
+
+    context = {"show_themes": show_themes, "page_obj": page_obj, "is_paginated": is_paginated, "paginator": paginator}
 
     return render(request, "show_themes/show_themes_list.html", context)
 
@@ -47,7 +59,7 @@ class ShowSessionsListView(generic.ListView):
     queryset = ShowSession.objects.select_related("astronomy_show", "planetarium_dome")
     context_object_name = "show_sessions"
     template_name = "show_sessions/show_sessions_list.html"
-
+    paginate_by = 3
 
 class ShowSessionsDetailView(generic.DetailView):
     model = ShowSession
@@ -60,6 +72,7 @@ class TicketListView(generic.ListView):
     queryset = Ticket.objects.select_related("show_sessions", "reserve").select_related("show_sessions__astronomy_show", "show_sessions__planetarium_dome")
     context_object_name = "tickets"
     template_name = "tickets/ticket_list.html"
+    paginate_by = 3
 
 
 
@@ -74,6 +87,7 @@ class ReservationListView(generic.ListView):
     model = Reservation
     context_object_name = "reservations"
     template_name = "reservations/reservations_list.html"
+    paginate_by = 3
 
 
 class ReservationDetailView(generic.DetailView):
@@ -86,6 +100,7 @@ class PlanetariumDomeListView(generic.ListView):
     model = PlanetariumDome
     context_object_name = "planetarium_domes"
     template_name = "planetarium_domes/planetarium_domes_list.html"
+    paginate_by = 3
 
 
 class PlanetariumDomeDetailView(generic.DetailView):
@@ -98,6 +113,7 @@ class AstronomyShowListView(generic.ListView):
     model = AstronomyShow
     context_object_name = "astronomy_shows"
     template_name = "astronomy_shows/astronomy_shows_list.html"
+    paginate_by = 3
 
 class AstronomyShowDetailView(generic.DetailView):
     model = AstronomyShow
