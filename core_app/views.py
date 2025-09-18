@@ -4,7 +4,7 @@ from django.http import HttpRequest, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.http.response import Http404, HttpResponseRedirect
 from django.views import generic
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls import reverse, reverse_lazy
 
@@ -124,7 +124,17 @@ def show_themes_create(request: HttpRequest) -> HttpResponse:
 
 @login_required
 def show_themes_update(request: HttpRequest, pk: int) -> HttpResponse:
-    pass
+    show_theme = get_object_or_404(ShowTheme, pk=pk)
+
+    if request.method == 'POST':
+        form = ShowThemeForm(request.POST, instance=show_theme)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect(reverse("core_app:showthemes-list"))
+    else:
+        form = ShowThemeForm(instance=show_theme)
+
+        return render(request, "show_themes/show_themes_form.html", {'form': form})
 
 
 class ShowSessionsListView(LoginRequiredMixin, generic.ListView):
