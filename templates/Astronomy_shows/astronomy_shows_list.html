@@ -8,9 +8,29 @@
   <h1>Astronomy Shows List</h1>
   <ul>
     {% if astronomy_shows %}
-      {% for astronomy_show in astronomy_shows %}
-        <li><a href="{% url 'core_app:astronomyshows-detail' astronomy_show.id %}">{{ astronomy_show.title }}, {{ astronomy_show.description }}, {{ astronomy_show.themes }} </a> </li>
-      {% endfor %}
+      <table class="table table-striped table-hover">
+          <tr>
+            <th>ID</th>
+            <th>TITLE</th>
+            <th>DESCRIPTION</th>
+            <th>THEMES</th>
+            <th>UPDATE</th>
+            <th>DELETE</th>
+          </tr>
+          {% for astronomy_show in astronomy_shows %}
+            <tr>
+              <td>{{ astronomy_show.id }}</td>
+              <td>{{ astronomy_show.title }}</td>
+              <td>{{ astronomy_show.description }}</td>
+              <td>  {% for theme in astronomy_show.themes.all %}
+                      {{ theme.name }}{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+              </td>
+              <td><a class="btn btn-primary" href="{% url 'core_app:astronomyshows-update' pk=astronomy_show.id %}">UPDATE</a></td>
+              <td><a class="btn btn-danger" href="{% url 'core_app:astronomyshows-delete' pk=astronomy_show.id %}">DELETE</a></td>
+            </tr>
+          {% endfor %}
+      </table>
     {% else %}
       <p> No Astronomy Shows found</p>
     {% endif %}

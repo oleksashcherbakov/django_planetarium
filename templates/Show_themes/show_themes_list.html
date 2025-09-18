@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-  <h1>Show Themes List</h1>
+  <h1>Show Themes List <a href="{% url 'core_app:showthemes-create' %}" style="text-decoration: none;">+</a> </h1>
   <ul>
     {% if show_themes %}
       {% for theme in show_themes %}
