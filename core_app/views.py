@@ -100,12 +100,11 @@ def show_themes_detail(request: HttpRequest, pk: int) -> HttpResponse:
     context = {"show_theme": show_theme}
     return render(request, "show_themes/show_themes_detail.html", context)
 
+
 @login_required
 def show_themes_create(request: HttpRequest) -> HttpResponse:
     if request.method == "GET":
-        context = {
-            "form": ShowThemeForm()
-        }
+        context = {"form": ShowThemeForm()}
         return render(request, "show_themes/show_themes_form.html", context=context)
 
     if request.method == "POST":
@@ -115,9 +114,7 @@ def show_themes_create(request: HttpRequest) -> HttpResponse:
             ShowTheme.objects.create(**form.cleaned_data)
             return HttpResponseRedirect(reverse("core_app:showthemes-list"))
 
-        context = {
-            "form": form
-        }
+        context = {"form": form}
 
         return render(request, "show_themes/show_themes_form.html", context=context)
 
@@ -126,7 +123,7 @@ def show_themes_create(request: HttpRequest) -> HttpResponse:
 def show_themes_update(request: HttpRequest, pk: int) -> HttpResponse:
     show_theme = get_object_or_404(ShowTheme, pk=pk)
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ShowThemeForm(request.POST, instance=show_theme)
         if form.is_valid():
             form.save()
@@ -134,7 +131,22 @@ def show_themes_update(request: HttpRequest, pk: int) -> HttpResponse:
     else:
         form = ShowThemeForm(instance=show_theme)
 
-        return render(request, "show_themes/show_themes_form.html", {'form': form})
+        return render(request, "show_themes/show_themes_form.html", {"form": form})
+
+
+@login_required
+def show_themes_delete(request: HttpRequest, pk: int) -> HttpResponse:
+    show_theme = get_object_or_404(ShowTheme, pk=pk)
+
+    if request.method == "POST":
+        show_theme.delete()
+        return HttpResponseRedirect(reverse("core_app:showthemes-list"))
+
+    return render(
+        request,
+        "show_themes/show_themes_confirm_delete.html",
+        {"show_theme": show_theme},
+    )
 
 
 class ShowSessionsListView(LoginRequiredMixin, generic.ListView):
@@ -154,14 +166,14 @@ class ShowSessionsDetailView(LoginRequiredMixin, generic.DetailView):
 
 class ShowSessionsCreateView(LoginRequiredMixin, generic.CreateView):
     model = ShowSession
-    fields = '__all__'
+    fields = "__all__"
     template_name = "show_sessions/show_session_form.html"
     success_url = reverse_lazy("core_app:showsessions-list")
 
 
 class ShowSessionsUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = ShowSession
-    fields = '__all__'
+    fields = "__all__"
     template_name = "show_sessions/show_session_form.html"
     success_url = reverse_lazy("core_app:showsessions-list")
 
@@ -193,24 +205,23 @@ class TicketDetailView(LoginRequiredMixin, generic.DetailView):
 
 class TicketCreateView(LoginRequiredMixin, generic.CreateView):
     model = Ticket
-    fields = '__all__'
+    fields = "__all__"
     template_name = "tickets/ticket_form.html"
     success_url = reverse_lazy("core_app:tickets-list")
 
 
 class TicketUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Ticket
-    fields = '__all__'
+    fields = "__all__"
     template_name = "tickets/ticket_form.html"
     success_url = reverse_lazy("core_app:tickets-list")
 
 
 class TicketDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Ticket
-    fields = '__all__'
+    fields = "__all__"
     template_name = "tickets/tickets_confirm_delete.html"
     success_url = reverse_lazy("core_app:tickets-list")
-
 
 
 class ReservationListView(LoginRequiredMixin, generic.ListView):
@@ -225,24 +236,27 @@ class ReservationDetailView(LoginRequiredMixin, generic.DetailView):
     context_object_name = "reservation"
     template_name = "reservations/reservation_detail.html"
 
+
 class ReservationCreateView(LoginRequiredMixin, generic.CreateView):
     model = Reservation
-    fields = '__all__'
+    fields = "__all__"
     template_name = "reservations/reservation_form.html"
     success_url = reverse_lazy("core_app:reservations-list")
 
+
 class ReservationUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = Reservation
-    fields = '__all__'
+    fields = "__all__"
     template_name = "reservation/reservation_form.html"
     success_url = reverse_lazy("core_app:reservations-list")
 
 
 class ReservationDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = Reservation
-    fields = '__all__'
+    fields = "__all__"
     template_name = "reservation/reservations_confirm_delete.html"
     success_url = reverse_lazy("core_app:reservations-list")
+
 
 class PlanetariumDomeListView(LoginRequiredMixin, generic.ListView):
     model = PlanetariumDome
@@ -260,22 +274,24 @@ class PlanetariumDomeDetailView(LoginRequiredMixin, generic.DetailView):
 
 class PlanetariumDomeCreateView(LoginRequiredMixin, generic.CreateView):
     model = PlanetariumDome
-    fields = '__all__'
+    fields = "__all__"
     template_name = "planetarium_domes/planetarium_dome_form.html"
     success_url = reverse_lazy("core_app:planetariumdomes-list")
 
+
 class PlanetariumDomeUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = PlanetariumDome
-    fields = '__all__'
+    fields = "__all__"
     template_name = "planetarium_domes/planetarium_dome_form.html"
     success_url = reverse_lazy("core_app:planetariumdomes-list")
 
 
 class PlanetariumDomeDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = PlanetariumDome
-    fields = '__all__'
+    fields = "__all__"
     template_name = "planetarium_domes/planetarium_domes_confirm_delete.html"
     success_url = reverse_lazy("core_app:planetariumdomes-list")
+
 
 class AstronomyShowListView(LoginRequiredMixin, generic.ListView):
     model = AstronomyShow
@@ -292,22 +308,23 @@ class AstronomyShowDetailView(LoginRequiredMixin, generic.DetailView):
     context_object_name = "astronomy_show"
     template_name = "astronomy_shows/astronomy_show_detail.html"
 
+
 class AstronomyShowCreateView(LoginRequiredMixin, generic.CreateView):
     model = AstronomyShow
-    fields = '__all__'
+    fields = "__all__"
     template_name = "astronomy_shows/astronomy_show_form.html"
     success_url = reverse_lazy("astronomy:astronomy_shows_list.html")
 
 
 class AstronomyShowUpdateView(LoginRequiredMixin, generic.UpdateView):
     model = AstronomyShow
-    fields = '__all__'
+    fields = "__all__"
     template_name = "Astronomy_shows/astronomy_show_form.html"
     success_url = reverse_lazy("core_app:astronomyshows-list")
 
 
 class AstronomyShowDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = AstronomyShow
-    fields = '__all__'
+    fields = "__all__"
     template_name = "Astronomy_shows/astronomy_show_confirm_delete.html"
     success_url = reverse_lazy("core_app:astronomyshows-list")
